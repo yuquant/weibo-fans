@@ -8,8 +8,7 @@ import requests
 import time
 import re
 import random
-from bs4 import BeautifulSoup
-import json
+
 
 def main():
     num = 0
