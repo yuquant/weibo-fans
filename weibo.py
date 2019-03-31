@@ -13,7 +13,7 @@ import json
 
 def main():
     num = 0
-    for public_id in public_ids:
+    for public_id in PUBLIC_IDS:
         print(public_id)
         for page in range(1, 6):
             url = 'https://weibo.com/p/{}/follow?relate=fans&page={}#Pl_Official_HisRelation__50'.format(public_id,
@@ -27,7 +27,7 @@ def main():
                        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
                        'Accept-Encoding': 'gzip, deflate, br',
                        'Accept-Language': 'zh-CN,zh;q=0.9',
-                       'Cookie': cookie}
+                       'Cookie': COOKIE}
             print(page)
             try:
                 content = requests.get(url, headers=headers)
@@ -35,7 +35,7 @@ def main():
                 # target = soup.find_all('li')
                 uid = re.findall(pattern='地址<\\\/em><span>(.*?)<\\\/span>.*?&uid=(\d{10})&location=', string=content.text)
                 # uid = re.findall(pattern='地址<\\\/em><span>(.*?)<\\\/span>', string=content.text)
-                bj_uid = [x[1] for x in uid if PALCE in x[0]]
+                bj_uid = [x[1] for x in uid if PLACE in x[0]]
                 # uids = re.findall(pattern='&uid=(\d{10})&fnick', string=content.text)
             except Exception as e:
                 print(e)
@@ -50,7 +50,7 @@ def main():
                        'Referer': url,
                        'Accept-Encoding': 'gzip, deflate, br',
                        'Accept-Language': 'zh-CN,zh;q=0.9',
-                       'Cookie': cookie}
+                       'Cookie': COOKIE}
             # if not uids:
             #     print('请更新cookie')
             for uid in bj_uid:
@@ -77,7 +77,7 @@ def main():
 
 if __name__ == "__main__":
     # 想要复制的微博号id
-    public_ids = [
+    PUBLIC_IDS = [
         '1002062964296501',  # 重庆大学计算机学院虎溪校区
         '1002063786221941',  # 重庆大学建管学院研究生
         '1002066034587500',  # 重庆大学新闻学院团委学生会
@@ -154,6 +154,6 @@ if __name__ == "__main__":
                   ]
     # 每次需要手动关注通过F12获取更新,见[guide.png]
     PLACE = '北京'
-    cookie = 'SINAGLOBAL=6607525835279.375.1492593520448; __guid=15428400.3316352832784033300.1551532805436.9214; SUBP=0033WrSXqPxfM725Ws9jqgMF55529P9D9WFA16FqlvpLiPPZ6ZhdYlWl5JpX5KMhUgL.Foq41h5EeK.Reh-2dJLoIc7LxK.L1hML12BLxK-LB.2L1hqLxK-LBKBLBKMLxK-LB-BLBKqLxK-L12eL1KMLxKBLB.2LB-eLxKqL1K-LBo5LxK-LB-BL1KMLxKMLB.zL12qLxKqLBo-L12-LxK-L1hnL1hqLxKBLB.eL1-2t; UOR=login.sina.com.cn,vdisk.weibo.com,login.sina.com.cn; Ugrow-G0=e66b2e50a7e7f417f6cc12eec600f517; ALF=1585567280; SSOLoginState=1554031283; SCF=ApvnSjuEWEfo3HfrDGBfgEB0qiH4UzEpnNK_XJSTQpjKvow-BOBOCmlnYle88Tuf-iLj1NpkCkuSogylE9hXNrs.; SUB=_2A25xpNLkDeRhGeBH41IT8SfEyzmIHXVS0EMsrDV8PUNbmtBeLU7ZkW9NQbkDQnU1KMlzchcXytbwXrQ408xobue9; SUHB=0C1yw_mLUl15g3; wvr=6; YF-V5-G0=b4445e3d303e043620cf1d40fc14e97a; wb_view_log_6980219805=1920*10801.5; _s_tentry=-; Apache=5238487155394.633.1554031295644; ULV=1554031295660:42:10:1:5238487155394.633.1554031295644:1553304183719; monitor_count=2; YF-Page-G0=4b5a51adf43e782f0f0fb9c1ea76df93|1554031350|1554031296; webim_unReadCount=%7B%22time%22%3A1554031351911%2C%22dm_pub_total%22%3A2%2C%22chat_group_pc%22%3A0%2C%22allcountNum%22%3A3%2C%22msgbox%22%3A0%7D'
+    COOKIE = 'SINAGLOBAL=6607525835279.375.1492593520448; __guid=15428400.3316352832784033300.1551532805436.9214; SUBP=0033WrSXqPxfM725Ws9jqgMF55529P9D9WFA16FqlvpLiPPZ6ZhdYlWl5JpX5KMhUgL.Foq41h5EeK.Reh-2dJLoIc7LxK.L1hML12BLxK-LB.2L1hqLxK-LBKBLBKMLxK-LB-BLBKqLxK-L12eL1KMLxKBLB.2LB-eLxKqL1K-LBo5LxK-LB-BL1KMLxKMLB.zL12qLxKqLBo-L12-LxK-L1hnL1hqLxKBLB.eL1-2t; UOR=login.sina.com.cn,vdisk.weibo.com,login.sina.com.cn; Ugrow-G0=e66b2e50a7e7f417f6cc12eec600f517; ALF=1585567280; SSOLoginState=1554031283; SCF=ApvnSjuEWEfo3HfrDGBfgEB0qiH4UzEpnNK_XJSTQpjKvow-BOBOCmlnYle88Tuf-iLj1NpkCkuSogylE9hXNrs.; SUB=_2A25xpNLkDeRhGeBH41IT8SfEyzmIHXVS0EMsrDV8PUNbmtBeLU7ZkW9NQbkDQnU1KMlzchcXytbwXrQ408xobue9; SUHB=0C1yw_mLUl15g3; wvr=6; YF-V5-G0=b4445e3d303e043620cf1d40fc14e97a; wb_view_log_6980219805=1920*10801.5; _s_tentry=-; Apache=5238487155394.633.1554031295644; ULV=1554031295660:42:10:1:5238487155394.633.1554031295644:1553304183719; monitor_count=2; YF-Page-G0=4b5a51adf43e782f0f0fb9c1ea76df93|1554031350|1554031296; webim_unReadCount=%7B%22time%22%3A1554031351911%2C%22dm_pub_total%22%3A2%2C%22chat_group_pc%22%3A0%2C%22allcountNum%22%3A3%2C%22msgbox%22%3A0%7D'
 
     main()
